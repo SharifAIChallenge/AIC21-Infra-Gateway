@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'apps.upload',
+    'logpipe',
 ]
 
 MIDDLEWARE = [
@@ -66,6 +69,19 @@ TEMPLATES = [
         },
     },
 ]
+
+LOGPIPE = {
+    # Required Settings
+    'OFFSET_BACKEND': 'logpipe.backend.kafka.ModelOffsetStore',
+    'CONSUMER_BACKEND': 'logpipe.backend.kafka.Consumer',
+    'PRODUCER_BACKEND': 'logpipe.backend.kafka.Producer',
+    'KAFKA_BOOTSTRAP_SERVERS': [
+        'todo@:9092'
+    ],
+    'KAFKA_CONSUMER_KWARGS': {
+        'group_id': 'django-logpipe',
+    },
+}
 
 WSGI_APPLICATION = 'gateway.wsgi.application'
 
