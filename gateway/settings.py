@@ -11,10 +11,12 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
+from typing import List, Tuple
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -27,7 +29,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'apps.upload',
-    'logpipe',
+    'apps.game',
 ]
 
 MIDDLEWARE = [
@@ -70,21 +71,13 @@ TEMPLATES = [
     },
 ]
 
-LOGPIPE = {
-    # Required Settings
-    'OFFSET_BACKEND': 'logpipe.backend.kafka.ModelOffsetStore',
-    'CONSUMER_BACKEND': 'logpipe.backend.kafka.Consumer',
-    'PRODUCER_BACKEND': 'logpipe.backend.kafka.Producer',
-    'KAFKA_BOOTSTRAP_SERVERS': [
-        'todo@:9092'
-    ],
-    'KAFKA_CONSUMER_KWARGS': {
-        'group_id': 'django-logpipe',
-    },
-}
+# KAFKA_END_POINT = config('KAFKA_END_POINT')
+
+# MINIO_ENDPOINT = config('MINIO_ENDPOINT')
+# MINIO_ACCESS_KEY = config('MINIO_ACCESS_KEY')
+# MINIO_SECRET_KEY = config('MINIO_SECRET_KEY')
 
 WSGI_APPLICATION = 'gateway.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -95,7 +88,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -115,7 +107,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -128,7 +119,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
