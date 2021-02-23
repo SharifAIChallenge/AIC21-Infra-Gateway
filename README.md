@@ -1,1 +1,1 @@
-# gateway of Infra for AI Challenge 2021
+# AIC21-Infra-Gateway
