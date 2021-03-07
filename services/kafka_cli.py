@@ -14,5 +14,10 @@ class Topics(enum.Enum):
 
 class KafkaClient:
     @staticmethod
-    def send_message(topic, message):
-        kafka_producer.send(topic=topic, value=message)
+    def send_message(topic, message) -> bool:
+        try:
+            kafka_producer.send(topic=topic, value=message)
+            return True
+        except Exception as e:
+            print(e)
+            return False
