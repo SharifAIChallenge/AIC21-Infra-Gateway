@@ -3,7 +3,7 @@ from django.core.files.base import ContentFile
 import enum
 
 client = Minio(
-    "185.97.118.190:9001",
+    "185.204.197.207:9001",
     access_key="ngnFxoPBtPZjBS7m4x12Yb1q5FovKGa4Bl9PsENs13nmDTRp",
     secret_key="RuRRYyZKbOwVnkyNRYq1f7CRPq89XqOwFHkxoTY4Epq0fvHh",
     secure=False
