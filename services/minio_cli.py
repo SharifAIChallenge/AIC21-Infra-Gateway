@@ -14,7 +14,7 @@ client = Minio(
 class BucketName(enum.Enum):
     Code = 'code'
     Map = 'map'
-    Log = 'log'
+    Log = 'game-download'
 
 
 for e in BucketName:

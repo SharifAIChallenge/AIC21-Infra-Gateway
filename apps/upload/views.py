@@ -33,4 +33,4 @@ class StoreMapAPIView(GenericAPIView):
         if not successful_upload_to_minio:
             return Response(data={'error': 'minio server error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        return Response(data={'code_id': map_id}, status=status.HTTP_200_OK)
+        return Response(data={'map_id': map_id}, status=status.HTTP_200_OK)

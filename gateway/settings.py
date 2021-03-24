@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'apps.upload',
     'apps.game',
+    'apps.download',
 ]
 
 MIDDLEWARE = [
