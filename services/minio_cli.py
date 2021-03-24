@@ -1,11 +1,12 @@
 from minio import Minio
 from django.core.files.base import ContentFile
 import enum
+from gateway.settings import MINIO_ENDPOINT, MINIO_SECRET_KEY, MINIO_ACCESS_KEY
 
 client = Minio(
-    "185.204.197.207:9001",
-    access_key="ngnFxoPBtPZjBS7m4x12Yb1q5FovKGa4Bl9PsENs13nmDTRp",
-    secret_key="RuRRYyZKbOwVnkyNRYq1f7CRPq89XqOwFHkxoTY4Epq0fvHh",
+    endpoint=MINIO_ENDPOINT,
+    access_key=MINIO_ACCESS_KEY,
+    secret_key=MINIO_SECRET_KEY,
     secure=False
 )
 
