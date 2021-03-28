@@ -33,7 +33,8 @@ class MinioClient:
                 bucket_name, f'{file_id}.zip', content, length=len(content)
             )
             return True
-        except:
+        except Exception as e:
+            print(e)
             return False
 
     @staticmethod
@@ -41,5 +42,6 @@ class MinioClient:
         try:
             response = client.get_object(bucket_name, f'{file_id}.zip')
             return response.data
-        except:
+        except Exception as e:
+            print(e)
             return None

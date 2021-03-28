@@ -1,12 +1,12 @@
 import enum
 from json import dumps
 from kafka import KafkaProducer
-from gateway.settings import KAFKA_END_POINT
+from gateway.settings import KAFKA_ENDPOINT
 
-# kafka_producer = KafkaProducer(
-#     bootstrap_servers=KAFKA_END_POINT, value_serializer=lambda x: dumps(x).encode('utf-8')
-# )
-kafka_producer = 0
+kafka_producer = KafkaProducer(
+    bootstrap_servers=KAFKA_ENDPOINT, value_serializer=lambda x: dumps(x).encode('utf-8')
+)
+
 
 class Topics(enum.Enum):
     STORE_CODE = "store-code"
