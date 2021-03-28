@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 from datetime import timedelta
 from typing import List, Tuple
-from decouple import config
+from os import getenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +27,7 @@ SECRET_KEY = '!w3y*karph@rz%a(d(f2akhcc712z5-%#g*(c7mp=$#jql+cff'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -72,13 +72,13 @@ TEMPLATES = [
     },
 ]
 
-KAFKA_END_POINT = config('KAFKA_END_POINT')
-MINIO_ENDPOINT = config('MINIO_ENDPOINT')
-MINIO_ACCESS_KEY = config('MINIO_ACCESS_KEY')
-MINIO_SECRET_KEY = config('MINIO_SECRET_KEY')
-BACKEND_URL = config('BACKEND_URL')
-BACKEND_AUTH_USER = config('BACKEND_AUTH_USER')
-BACKEND_AUTH_PATH = config('BACKEND_AUTH_PATH')
+KAFKA_ENDPOINT = getenv('KAFKA_ENDPOINT')
+MINIO_ENDPOINT = getenv('MINIO_ENDPOINT')
+MINIO_ACCESS_KEY = getenv('MINIO_ACCESS_KEY')
+MINIO_SECRET_KEY = getenv('MINIO_SECRET_KEY')
+BACKEND_URL = getenv('BACKEND_URL')
+BACKEND_AUTH_USER = getenv('BACKEND_AUTH_USER')
+BACKEND_AUTH_PATH = getenv('BACKEND_AUTH_PATH')
 
 WSGI_APPLICATION = 'gateway.wsgi.application'
 
