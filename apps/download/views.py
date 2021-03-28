@@ -3,9 +3,11 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from services.minio_cli import BucketName
 from gateway.settings import MINIO_DOWNLOAD_LINK_DOMAIN
+from apps import permissions
 
 
 class GameLogAPIView(GenericAPIView):
+    permission_classes = [permissions.IsBackend]
 
     def get(self, request):
         game_id = request.GET['game_id']
@@ -20,6 +22,8 @@ class GameLogAPIView(GenericAPIView):
 
 
 class CodeAPIView(GenericAPIView):
+    permission_classes = [permissions.IsBackend]
+
     def get(self, request):
         code_id = request.GET['code_id']
         bucket_name = BucketName.Code.value

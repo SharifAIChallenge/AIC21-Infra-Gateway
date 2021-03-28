@@ -4,9 +4,12 @@ from rest_framework.response import Response
 from services.kafka_cli import KafkaClient, Topics
 import json
 import uuid
+from apps import permissions
 
 
 class PlayGameAPIView(GenericAPIView):
+    permission_classes = [permissions.IsBackend]
+
     def post(self, request):
         game_id = uuid.uuid4()
         game_information = json.loads(request.body)

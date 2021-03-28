@@ -4,9 +4,12 @@ from rest_framework.response import Response
 from services.kafka_cli import KafkaClient, Topics
 from services.minio_cli import MinioClient, BucketName
 import uuid
+from apps import permissions
 
 
 class StoreCodeAPIView(GenericAPIView):
+    permission_classes = [permissions.IsBackend]
+
     def post(self, request):
         language = request.data['language']
         code_id = uuid.uuid4()
@@ -25,6 +28,8 @@ class StoreCodeAPIView(GenericAPIView):
 
 
 class StoreMapAPIView(GenericAPIView):
+    permission_classes = [permissions.IsBackend]
+
     def post(self, request):
         map_id = uuid.uuid4()
         file = request.FILES['file']
