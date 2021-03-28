@@ -1,7 +1,8 @@
 from rest_framework import status
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
-from services.minio_cli import MinioClient, BucketName
+from services.minio_cli import BucketName
+from gateway.settings import MINIO_DOWNLOAD_LINK_DOMAIN
 
 
 class GameLogAPIView(GenericAPIView):
@@ -9,12 +10,18 @@ class GameLogAPIView(GenericAPIView):
     def get(self, request):
         game_id = request.GET['game_id']
         player_id = request.GET['player_id']
-        # todo
-        return Response(data={'log': 'log'}, status=status.HTTP_200_OK)
+        bucket_name = BucketName.Log.value
+        if player_id:
+            download_link = f"https://{MINIO_DOWNLOAD_LINK_DOMAIN}/{bucket_name}/{game_id}/{player_id}.log"
+        else:
+            download_link = f"https://{MINIO_DOWNLOAD_LINK_DOMAIN}/{bucket_name}/{game_id}/{game_id}.log"
+
+        return Response(data={'log': download_link}, status=status.HTTP_200_OK)
 
 
 class CodeAPIView(GenericAPIView):
     def get(self, request):
         code_id = request.GET['code_id']
-        # todo
-        return Response(data={'code': 'code'}, status=status.HTTP_200_OK)
+        bucket_name = BucketName.Code.value
+        download_link = f"https://{MINIO_DOWNLOAD_LINK_DOMAIN}/{bucket_name}/{code_id}.zip"
+        return Response(data={'code': download_link}, status=status.HTTP_200_OK)
