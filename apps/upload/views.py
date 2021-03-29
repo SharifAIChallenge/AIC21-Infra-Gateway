@@ -34,7 +34,7 @@ class StoreMapAPIView(GenericAPIView):
         map_id = uuid.uuid4()
         file = request.FILES['file']
 
-        successful_upload_to_minio = MinioClient.upload(map_id, file, BucketName.Map.value)
+        successful_upload_to_minio = MinioClient.upload(map_id, file, BucketName.Map.value, postfix='')
         if not successful_upload_to_minio:
             return Response(data={'error': 'minio server error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 

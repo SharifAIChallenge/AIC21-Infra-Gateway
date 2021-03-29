@@ -26,11 +26,11 @@ for e in BucketName:
 class MinioClient:
 
     @staticmethod
-    def upload(file_id, file, bucket_name) -> bool:
+    def upload(file_id, file, bucket_name, postfix='.zip') -> bool:
         content = ContentFile(file.read())
         try:
             client.put_object(
-                bucket_name, f'{file_id}.zip', content, length=len(content)
+                bucket_name, f'{file_id}{postfix}', content, length=len(content)
             )
             return True
         except Exception as e:
