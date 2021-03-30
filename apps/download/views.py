@@ -14,9 +14,9 @@ class GameLogAPIView(GenericAPIView):
         player_id = request.GET.get('player_id')
         bucket_name = BucketName.Log.value
         if player_id:
-            download_link = f"{MINIO_DOWNLOAD_LINK_DOMAIN}/{bucket_name}/{game_id}/{player_id}.log"
+            download_link = f"{MINIO_DOWNLOAD_LINK_DOMAIN}/{bucket_name}/{game_id}/{player_id}"
         else:
-            download_link = f"{MINIO_DOWNLOAD_LINK_DOMAIN}/{bucket_name}/{game_id}/{game_id}.log"
+            download_link = f"{MINIO_DOWNLOAD_LINK_DOMAIN}/{bucket_name}/{game_id}/{game_id}"
 
         return Response(data={'log': download_link}, status=status.HTTP_200_OK)
 
@@ -27,5 +27,5 @@ class CodeAPIView(GenericAPIView):
     def get(self, request):
         code_id = request.GET['code_id']
         bucket_name = BucketName.Code.value
-        download_link = f"https://{MINIO_DOWNLOAD_LINK_DOMAIN}/{bucket_name}/{code_id}.zip"
+        download_link = f"{MINIO_DOWNLOAD_LINK_DOMAIN}/{bucket_name}/{code_id}.zip"
         return Response(data={'code': download_link}, status=status.HTTP_200_OK)
