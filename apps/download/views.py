@@ -10,8 +10,8 @@ class GameLogAPIView(GenericAPIView):
     permission_classes = [permissions.IsBackend]
 
     def get(self, request):
-        game_id = request.GET['game_id']
-        player_id = request.GET['player_id']
+        game_id = request.GET.get('game_id')
+        player_id = request.GET.get('player_id')
         bucket_name = BucketName.Log.value
         if player_id:
             download_link = f"https://{MINIO_DOWNLOAD_LINK_DOMAIN}/{bucket_name}/{game_id}/{player_id}.log"
