@@ -1,4 +1,5 @@
 import enum
+import os
 from json import dumps
 from kafka import KafkaProducer
 from gateway.settings import KAFKA_ENDPOINT
@@ -9,8 +10,8 @@ kafka_producer = KafkaProducer(
 
 
 class Topics(enum.Enum):
-    STORE_CODE = "store-code"
-    PLAY_GAME = "play-game"
+    STORE_CODE = os.getenv('KAFKA_TOPIC_STORE_CODE')
+    PLAY_GAME = os.getenv('KAFKA_TOPIC_MATCH')
 
 
 class KafkaClient:
