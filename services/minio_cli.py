@@ -1,6 +1,7 @@
 from minio import Minio
 from django.core.files.base import ContentFile
 import enum
+import os
 from gateway.settings import MINIO_ENDPOINT, MINIO_SECRET_KEY, MINIO_ACCESS_KEY
 
 client = Minio(
@@ -12,9 +13,9 @@ client = Minio(
 
 
 class BucketName(enum.Enum):
-    Code = 'code'
-    Map = 'map'
-    Log = 'log'
+    Code = os.getenv('MINIO_BUCKET_CODE')
+    Map = os.getenv('MINIO_BUCKET_MAP')
+    Log = os.getenv('MINIO_BUCKET_LOG')
 
 
 for e in BucketName:
